@@ -63,6 +63,7 @@ namespace DesignControls.Controls
             canvas.DrawCircle(point, radius, circlePaint);
         }
 
+        int old = 1;
         /// <summary>
         /// 當物件被碰到時候的事件
         /// </summary>
@@ -83,7 +84,7 @@ namespace DesignControls.Controls
                         {
                             radius = (float)v;
                             this.InvalidateSurface();
-                        }, 1, slape, easing: Easing.Linear);
+                        }, old, slape, easing: Easing.Linear);
 
                         animate.Commit(this, "Ripple", length: 300, finished: (i, c) =>
                         {
@@ -103,6 +104,9 @@ namespace DesignControls.Controls
                         break;
                     }
             }
+
+            // 讓 OS 知道你想要一直接收 touch 事件
+            e.Handled = true;
         }
     }
 }
